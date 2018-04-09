@@ -1,7 +1,5 @@
 package dao;
 
-import org.apache.ibatis.annotations.Select;
-
 public class Vertex {
     private int id = 0;
     private String name;

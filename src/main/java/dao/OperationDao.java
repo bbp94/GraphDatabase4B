@@ -2,10 +2,8 @@ package dao;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Array;
 import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 @Component("operationDao")
 public interface OperationDao {
