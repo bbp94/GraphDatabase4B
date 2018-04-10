@@ -24,9 +24,7 @@
         <property name="checkoutTimeout" value="10000"/>
     </bean>
 
-    <!--<bean id="operationDao" class="dao.OperationDao" >-->
 
-    <!--</bean>-->
 
     <bean:component-scan base-package="dao"/>
 

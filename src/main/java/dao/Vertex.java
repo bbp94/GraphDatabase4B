@@ -7,7 +7,7 @@ public class Vertex {
     private int sex;
     private double salary;
 
-    public Vertex(int maxId){
+    public void setId(int maxId){
 //        设置自增产生ID,关于并发之后再考虑
 
         this.id = maxId+1;
