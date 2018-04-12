@@ -1,18 +1,20 @@
 package dao;
 
 public class Vertex {
-    private int id = 0;
+    private int id ;
     private String name;
     private int age;
     private int sex;
     private double salary;
 
-    public void setId(int maxId){
-//        设置自增产生ID,关于并发之后再考虑
-
-        this.id = maxId+1;
+//    public void setnewId(int maxId){
+////        设置自增产生ID,关于并发之后再考虑
+//
+//        this.id = maxId+1;
+//    }
+    public void setId(int id){
+        this.id = id;
     }
-
     public  Vertex(){
 
     }
@@ -21,22 +23,20 @@ public class Vertex {
         this.name = name;
     }
     public void setAge(int age){
-        if(age>0)
-            this.age = age;
-        else
-            System.out.println("无效年龄，请核对后重新输入...");
+
+        this.age = age;
+
     }
     public void setSex(int sex){
-        if(sex==0||sex==1)
-            this.sex = sex;
-        else
-            System.out.println("无效性别，请核对后重新输入...");
+
+        this.sex = sex;
+
+
     }
     public void setSalary(double salary){
-        if(salary>0)
-            this.salary = salary;
-        else
-            System.out.println("无效薪资，请核对后重新输入...");
+
+        this.salary = salary;
+
     }
     public int getId(){
         return id;

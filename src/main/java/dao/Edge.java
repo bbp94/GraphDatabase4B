@@ -8,22 +8,22 @@ public class Edge {
     private int originId;
     private int terminusId;
     private int relationId;
-    private HashMap<Integer,String> relationList;
+    private HashMap<Integer,String> relationList = new HashMap<Integer, String>();
 
-    public void setEdge(int maxId){
-        this.id = maxId+1;
+    public void setId(int id){
+        this.id = id;
 
     }
     public Edge(){
 
     }
-    public void setOriginId(int originId){
+    public void setOrigin_Id(int originId){
         this.originId = originId;
     }
-    public void setTerminusId(int terminusId){
+    public void setTerminus_Id(int terminusId){
         this.terminusId = terminusId;
     }
-    public void setRelationId(int relationId){
+    public void setRelation_Id(int relationId){
         this.relationId =  relationId;
     }
     public int getId(){
@@ -38,7 +38,7 @@ public class Edge {
     public int getRelationId(){
         return relationId;
     }
-    public Map<Integer,String> getRelationList(){
+    public HashMap<Integer,String> getRelationList(){
         this.relationList.put(1,"主管");
         this.relationList.put(2,"组长");
         this.relationList.put(3,"师傅");
