@@ -1,17 +1,14 @@
 package dao;
 
+import java.util.HashMap;
+
 public class Vertex {
     private int id ;
     private String name;
     private int age;
     private int sex;
     private double salary;
-
-//    public void setnewId(int maxId){
-////        设置自增产生ID,关于并发之后再考虑
-//
-//        this.id = maxId+1;
-//    }
+    private  HashMap<String,String> fieldMap= new HashMap<String, String>();
     public void setId(int id){
         this.id = id;
     }
@@ -38,6 +35,13 @@ public class Vertex {
         this.salary = salary;
 
     }
+    public void setFieldMap(){
+        this.fieldMap.put("ID","Integer");
+        this.fieldMap.put("NAME","String");
+        this.fieldMap.put("AGE","Integer");
+        this.fieldMap.put("SEX","Integer");
+        this.fieldMap.put("SALARY","Double");
+    }
     public int getId(){
         return id;
     }
@@ -52,5 +56,8 @@ public class Vertex {
     }
     public double getSalary(){
         return salary;
+    }
+    public HashMap<String,String> getFieldMap(){
+        return fieldMap;
     }
 }

@@ -18,13 +18,6 @@ public interface SQLDao {
         @Insert("Insert into vertex2(NAME,AGE,SEX,SALARY) VALUES (#{name},#{age},#{sex},#{salary})")
         @Options(useGeneratedKeys = true,keyColumn = "id")
         void insertVertex(Vertex vertex);
-//                @Param("id") int id
-//                         ,@Param("name") String name
-//                         ,@Param("age") int age
-//                         ,@Param("sex") int sex
-//                         ,@Param("salary") double salary);
-
-
 
         @Delete("Delete from ${table} where id=#{id}")
         void deleteById(@Param("table") String table,
@@ -33,7 +26,7 @@ public interface SQLDao {
         @Update("Update ${table} set ${field}=#{newValue} where id=#{id}")
         void updateById(@Param("table") String table,
                               @Param("field") String field,
-                              @Param("newValue") Object newValue,
+                              @Param("newValue") Integer newValue,
                               @Param("id") int id);
         void updateById(@Param("table") String table,
                               @Param("field") String field,
@@ -50,14 +43,14 @@ public interface SQLDao {
                                      @Param("id") int id);
 
         @Select("Select ID,NAME,AGE,SEX,SALARY from ${table}")
-        LinkedList<Vertex> selectAllOfVertex(@Param("table") String table);
+        ArrayList<Vertex> selectAllOfVertex(@Param("table") String table);
 
         @Select("Select ID,NAME,AGE,SEX,SALARY from ${table} where id=#{id}")
         Vertex selectAVertexById(@Param("table") String table,
                                      @Param("id") int id);
 
         @Select("Select ID,ORIGIN_ID,TERMINUS_ID,RELATION_ID from ${table}")
-        LinkedList<Edge> selectAllOfEdge(@Param("table") String table);
+        ArrayList<Edge> selectAllOfEdge(@Param("table") String table);
 
         @Select("Select ID,NAME,AGE,SEX,SALARY from ${table} where ID=#{value}")
         ArrayList<Vertex> selectAllOfVertexByTer(@Param("table") String table,

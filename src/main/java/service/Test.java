@@ -43,18 +43,9 @@ public class Test {
                 continue;
             }
 
-//            ArrayList<Vertex> temp1 = dao.selectAllOfVertexByTer("vertex2",4);
-//            for (Vertex vertex1:temp1){
-//                System.out.println("ID"+vertex1.getId()+"  NAME"+vertex1.getName());
-//            }
-//
-//            ArrayList<Edge> temp = dao.selectAllOfEdgeByORINGIN("edge2",1);
-//            for(Edge edge1:temp)
-//                System.out.println(edge1.getId()+edge.getOriginId()+edge.getTerminusId());
+
 
         }
-
-
 
     }
 }

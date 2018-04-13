@@ -9,6 +9,7 @@ public class Edge {
     private int terminusId;
     private int relationId;
     private HashMap<Integer,String> relationList = new HashMap<Integer, String>();
+    private HashMap<String,String> fieldMap = new HashMap<String, String>();
 
     public void setId(int id){
         this.id = id;
@@ -25,6 +26,12 @@ public class Edge {
     }
     public void setRelation_Id(int relationId){
         this.relationId =  relationId;
+    }
+    public void setFieldMap(){
+        this.fieldMap.put("ID","Integer");
+        this.fieldMap.put("ORIGIN_ID","Integer");
+        this.fieldMap.put("TERMINUS_ID","Integer");
+        this.fieldMap.put("RELATION_ID","Integer");
     }
     public int getId(){
         return id;
@@ -46,5 +53,8 @@ public class Edge {
         this.relationList.put(5,"师姐");
         this.relationList.put(6,"同事");
         return relationList;
+    }
+    public HashMap<String,String > getFieldMap(){
+        return fieldMap;
     }
 }
