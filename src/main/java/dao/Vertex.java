@@ -2,6 +2,10 @@ package dao;
 
 import java.util.HashMap;
 
+/**
+ * vertex对象
+ * 包含五个属性：id,name,age,sex,salary
+ */
 public class Vertex {
     private int id ;
     private String name;

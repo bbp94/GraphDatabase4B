@@ -3,6 +3,10 @@ package dao;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Edge对象
+ * 包含四个属性:id，originId，terminusId，relationId
+ */
 public class Edge {
     private int id;
     private int originId;

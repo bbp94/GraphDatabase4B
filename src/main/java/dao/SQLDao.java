@@ -3,11 +3,11 @@ package dao;
 import org.apache.ibatis.annotations.*;
 import org.omg.CORBA.Object;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 
+/**
+ * 数据库接口，用了Mybatis注解
+ */
 
 @Component("SQLDao")
 public interface SQLDao {

@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/***
+ * 操作类，事务实现
+ * 不足：边上的RELATION_ID无检查，点与点之间的关系逻辑可能混乱
+ * 主键自增导致ID不连续（删除某些ID无法自动填补）
+ */
 public class OperationDao {
     private String table;
     private SQLDao dao;
@@ -15,8 +20,6 @@ public class OperationDao {
         this.edge = edge;
         opration();
     }
-//    关系逻辑混乱无检查
-//    主键自增导致ID不连续（删除某些ID无法自动填补）
 
 
     public  void opration(){
@@ -24,10 +27,10 @@ public class OperationDao {
             System.out.println("请输入操作代号：1.增加；2.修改；3.删除；4.查询；5.返回上一界面；");
 
             try {
-//                下面的语句是否可以放到try前
                 Scanner scanner = new Scanner(System.in);
                 int operationCode = scanner.nextInt();
-                if (operationCode == 1 && table.equalsIgnoreCase("vertex2")) {//插入vertex
+                /** 插入vertex*/
+                if (operationCode == 1 && table.equalsIgnoreCase("vertex2")) {
                     System.out.println("NAME:");
                     vertex.setName(scanner.next());
                     System.out.println("AGE:");
@@ -53,7 +56,9 @@ public class OperationDao {
                     vertex.setSalary(salary);
                     dao.insertVertex(vertex);
                     System.out.println("插入成功！"+"\n");
-                } else if (operationCode == 1 && table.equalsIgnoreCase("edge2")) {//插入edge
+                }
+                /** 插入edge*/
+                else if (operationCode == 1 && table.equalsIgnoreCase("edge2")) {
                     ArrayList<Integer> idTemp = dao.selectAllIdOf("vertex2");
                     System.out.println("ORIGIN_ID");
                     int oId = scanner.nextInt();
@@ -64,6 +69,7 @@ public class OperationDao {
                     edge.setOrigin_Id(oId);
                     System.out.println("TERMINUS_ID");
                     int tId = scanner.nextInt();
+                    /** 起点，终点检查*/
                     if (!idTemp.contains(tId)) {
                         System.out.println("不存在该点，请核对后输入..."+"\n");
                         continue;
@@ -83,7 +89,9 @@ public class OperationDao {
                     edge.setRelation_Id(rId);
                     dao.insertEdge(edge);
                     System.out.println("插入成功！"+"\n");
-                } else if (operationCode == 3) {
+                }
+                /** 删除数据*/
+                else if (operationCode == 3) {
                     System.out.println("请输入需要删除的数据ID：");
                     int id = scanner.nextInt();
                     if (table.equals("vertex2")&&!dao.selectAllIdOf("vertex2").contains(id)){
@@ -97,7 +105,9 @@ public class OperationDao {
                     dao.deleteById(table, scanner.nextInt());
                     System.out.println("删除成功"+"\n");
 
-                } else if (operationCode == 2) {
+                }
+                /** 修改数据*/
+                else if (operationCode == 2) {
                     System.out.println("请输入需要修改的数据ID：");
                     int id = scanner.nextInt();
                     if (!dao.selectAllIdOf(table).contains(id)){
@@ -171,7 +181,9 @@ public class OperationDao {
                         dao.updateById(table,fieldName,scanner.nextDouble(),id);
                     }
                     System.out.println("修改成功！");
-                } else if (operationCode == 4) {
+                }
+                /** 查询数据*/
+                else if (operationCode == 4) {
                     System.out.println("输入查询代号：1.简单查询；2.联表查询");
                     if (scanner.nextInt() == 1) {
                         System.out.println("输入需要查询的ID(查看所有输入*)：");
@@ -185,7 +197,9 @@ public class OperationDao {
                                     System.out.println("ID=" + v.getId() + " NAME=" + v.getName()
                                             + " AGE=" + v.getAge() + " SEX=" + v.getSex() + " SALARY=" + v.getSalary());
                             }
-                        } else if (temp.equals("*") && table.equals("edge2")) {//查询edge表中所有
+                        }
+                        /** 查询edge表中所有数据*/
+                        else if (temp.equals("*") && table.equals("edge2")) {
                             ArrayList<Edge> tempList = dao.selectAllOfEdge(table);
                             if (tempList.size() == 0) {
                                 System.out.println("没有记录..."+"\n");
@@ -195,19 +209,23 @@ public class OperationDao {
                                             + " TERMINUS_ID=" + e.getTerminusId() + " RELATION=" + e.getRelationList().get(e.getRelationId()));
                             }
 
-                        } else {//查询任意表的某条记录
+                        }
+                        /** 表中任意一条数据*/
+                        else {
                             System.out.println(dao.selectById(table, Integer.valueOf(temp).intValue()));
                         }
 
-                    } else {
+                    }
+                    /** 联表查询某点N阶关系*/
+                    else {
                         System.out.println("输入代号1.查询职员N阶关系；");
                         if (scanner.nextInt() == 1) {
                             System.out.println("输入起始点：");
                             int idTemp = scanner.nextInt();
                             System.out.println("输入阶数：");
                             int N = scanner.nextInt();
-                            System.out.println("输入查询关系：" + edge.getRelationList());
-                            int relationTemp = scanner.nextInt();
+//                            System.out.println("输入查询关系：" + edge.getRelationList());
+//                            int relationTemp = scanner.nextInt();
                             int count = 0;
                             int flag = 0;
                             count=find(N, dao.selectAVertexById("vertex2", idTemp), count,flag);
@@ -219,7 +237,9 @@ public class OperationDao {
                         }
                     }
 
-                } else if (operationCode == 5) {
+                }
+                /** 退出*/
+                else if (operationCode == 5) {
                     break;
                 }
             }catch (Exception E){
@@ -232,11 +252,11 @@ public class OperationDao {
 
     /***
      * 递归查找某点N阶关系
-     * @param N
-     * @param v
-     * @param count
-     * @param flag
-     * @return
+     * @param N N阶
+     * @param v 节点对象
+     * @param count 起始点的N阶关系的点的数量
+     * @param flag 递归次数计数，用于终止递归
+     * @return 返回count
      */
     public int find(int N, Vertex v, int count,int flag){
 

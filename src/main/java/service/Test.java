@@ -10,14 +10,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * 测试类
+ */
 public class Test {
     public static void main(String[] args){
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring-config.xml");
-        SQLDao dao = ctx.getBean("SQLDao", SQLDao.class);//返回SQLDao类型
+        SQLDao dao = ctx.getBean("SQLDao", SQLDao.class);
         Vertex vertex = new Vertex();
         Edge edge = new Edge();
-        ArrayList<String> tableList= new ArrayList<String >();//存放所有表名，将改为用Mybatis获取
+        ArrayList<String> tableList= new ArrayList<String >();//存放所有表名，应改为用Mybatis获取
         tableList.add("vertex2");
         tableList.add("edge2");
         while (true){
